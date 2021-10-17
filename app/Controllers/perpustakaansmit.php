@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class perpustakaansmit extends BaseController
+class Perpustakaansmit extends BaseController
 {
     function __construct()
     {
@@ -10,6 +10,6 @@ class perpustakaansmit extends BaseController
     }
     public function index()
     {
-        return view('perpustkaansmit_view');
+        return view('perpustakaansmit_view');
     }
 }
