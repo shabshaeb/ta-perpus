@@ -6,7 +6,7 @@ class Perpustakaansmit extends BaseController
 {
     function __construct()
     {
-        $this->model = new \App\Models\ModelBuku();
+        //$this->model = new \App\Models\ModelBuku();
     }
     public function index()
     {
