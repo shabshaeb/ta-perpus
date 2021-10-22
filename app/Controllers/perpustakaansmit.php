@@ -8,6 +8,10 @@ class Perpustakaansmit extends BaseController
     {
         //$this->model = new \App\Models\ModelBuku();
     }
+    public function tambah()
+    {
+        return "saya dari fungsi Tambah";
+    }
     public function index()
     {
         return view('perpustakaansmit_view');
