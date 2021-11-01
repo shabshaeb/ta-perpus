@@ -55,7 +55,7 @@
         </div>
         <!-- INPUT DATA BUKU -->
         <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Kode Buku</label>
+  <label for="InputKodeBuku" class="form-label">Kode Buku</label>
   <input type="number" class="form-control" id="InputKodeBuku" placeholder="">
 </div>
 <div class="mb-3">
@@ -67,7 +67,7 @@
   <input type="text" class="form-control" id="InputKategoriBuku" placeholder="">
 </div>
 <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">Pengarang</label>
+  <label for="InputPengarang" class="form-label">Pengarang</label>
   <input type="text" class="form-control" id="InputPengarang" placeholder="">
 </div>
 <div class="mb-3">
@@ -142,14 +142,14 @@
      <script>
        $('#tomboltambahdata').on('click', function() {
           var $Kode_Buku = $('#InputKodeBuku').val();
-          var $Judul_Buku = $('InputJudulBuku').val();
-          var $Kategori_Buku = $('InputKategoriBuku').val();
-          var $Pengarang = $('InputPengarang').val();
-          var $Penerbit = $('InputPenerbit').val();
-          var $Tahun_Terbit = $('InputTahunTerbit').val();
-          var $Jumlah_Halaman = $('InputJumlahHalaman').val();
-          var $Jumlah_Eksemplar = $('InputJumlahEksemplar').val();
-          var $Nomor_ISBN = $('InputNomorISBN').val();
+          var $Judul_Buku = $('#InputJudulBuku').val();
+          var $Kategori_Buku = $('#InputKategoriBuku').val();
+          var $Pengarang = $('#InputPengarang').val();
+          var $Penerbit = $('#InputPenerbit').val();
+          var $Tahun_Terbit = $('#InputTahunTerbit').val();
+          var $Jumlah_Halaman = $('#InputJumlahHalaman').val();
+          var $Jumlah_Eksemplar = $('#InputJumlahEksemplar').val();
+          var $Nomor_ISBN = $('#InputNomorISBN').val();
 
           $.ajax({
             url: "<?php echo site_url("Perpustakaansmit/Tambah") ?>",

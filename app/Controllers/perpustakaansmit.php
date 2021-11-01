@@ -12,7 +12,7 @@ class Perpustakaansmit extends BaseController
     {
         $validasi = \Config\Services::validation();
         $aturan = [
-           'Kode Buku' => [
+           'Kode_Buku' => [
                'label' => 'Kode Buku',
                'rules' => 'required|min_Length[4]',
                'errors' => [
@@ -20,7 +20,7 @@ class Perpustakaansmit extends BaseController
                    'min_length' => 'Minimum karakter 4'
                ]
             ], 
-            'Judul Buku' => [
+            'Judul_Buku' => [
                'label' => 'Judul Buku',
                'rules' => 'required|min_Length[4]',
                'errors' => [
@@ -28,7 +28,7 @@ class Perpustakaansmit extends BaseController
                    'min_length' => 'Minimum karakter 4 karakter'
                ]
             ],
-            'Kategori Buku' => [
+            'Kategori_Buku' => [
                'label' => 'Kategori Buku',
                'rules' => 'required|min_Length[4]',
                'errors' => [
@@ -52,7 +52,7 @@ class Perpustakaansmit extends BaseController
                    'min_length' => 'Minimum karakter 4 karakter'
                ]
             ],
-            'Tahun Terbit' => [
+            'Tahun_Terbit' => [
                'label' => 'Tahun Terbit',
                'rules' => 'required|min_Length[4]',
                'errors' => [
@@ -60,7 +60,7 @@ class Perpustakaansmit extends BaseController
                    'min_length' => 'Minimum karakter 4 karakter'
                ]
             ],
-            'Jumlah Halaman' => [
+            'Jumlah_Halaman' => [
                'label' => 'Jumlah Halaman',
                'rules' => 'required|min_Length[1]',
                'errors' => [
@@ -68,7 +68,7 @@ class Perpustakaansmit extends BaseController
                    'min_length' => 'Masukkan angka'
                ]
             ],
-            'Jumlah Eksemplar' => [
+            'Jumlah_Eksemplar' => [
                'label' => 'Jumlah Eksemplar',
                'rules' => 'required|min_Length[1]',
                'errors' => [
@@ -76,7 +76,7 @@ class Perpustakaansmit extends BaseController
                    'min_length' => 'Masukkan Angka'
                ]
             ],
-            'Nomor ISBN' => [
+            'Nomor_ISBN' => [
                'label' => 'Nomor ISBN',
                'rules' => 'required|min_Length[1]',
                'errors' => [
@@ -88,16 +88,16 @@ class Perpustakaansmit extends BaseController
         
         $validasi->setRules($aturan);
         if ($validasi->withRequest($this->request)->run()) {
-           $Kode_Buku = $this->request->getPost('Kode Buku');
-           $Judul_Buku = $this->request->getPost('Judul Buku');
-           $Kategori_Buku = $this->request->getPost('Kategori Buku'); 
+           $Kode_Buku = $this->request->getPost('Kode_Buku');
+           $Judul_Buku = $this->request->getPost('Judul_Buku');
+           $Kategori_Buku = $this->request->getPost('Kategori_Buku'); 
            $Pengarang = $this->request->getPost('Pengarang');
            $Penerbit = $this->request->getPost('Penerbit');
-           $Tahun_Terbit = $this->request->getPost('Tahun Terbit');
-           $Jumlah_Halaman = $this->request->getPost('Jumlah Halaman');
-           $Jumlah_Eksemplar = $this->request->getPost('Jumlah Eksemplar');
-           $Nomor_ISBN = $this->request->getPost('Nomor ISBN');
-
+           $Tahun_Terbit = $this->request->getPost('Tahun_Terbit');
+           $Jumlah_Halaman = $this->request->getPost('Jumlah_Halaman');
+           $Jumlah_Eksemplar = $this->request->getPost('Jumlah_Eksemplar');
+           $Nomor_ISBN = $this->request->getPost('Nomor_ISBN');
+           
            $hasil['sukses'] = "Data Berhasil ditambah";
            $hasil['error'] = true;
         } else {
