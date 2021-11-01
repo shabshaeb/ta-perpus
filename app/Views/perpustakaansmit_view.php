@@ -47,6 +47,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <!-- ALERT KALAU GAGAL TAMBAH DATA -->
+        <div class="alert alert-danger error" role="alert" style="display:none;">
+        </div>
+        <!-- ALERT KALAU SUKSES TAMBAH DATA -->
+        <div class="alert alert-success sukses" role="alert" style="display: none;">
+        </div>
         <!-- INPUT DATA BUKU -->
         <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">Kode Buku</label>
@@ -135,25 +141,44 @@
 
      <script>
        $('#tomboltambahdata').on('click', function() {
-          var Kode Buku = $('#InputKodeBuku') val();
-          var Judul Buku = $('InputJudulBuku') val();
-          var Kategori Buku = $('InputKategoriBuku') val();
-          var Pengarang = $('InputPengarang') val();
-          var Penerbit = $('InputPenerbit') val();
-          var Tahun Terbit = $('InputTahunTerbit') val();
-          var Jumlah Halaman = $('InputJumlahHalaman') val();
-          var Jumlah Eksemplar = $('InputJumlahEksemplar') val();
-          var Nomor ISBN = $('InputNomorISBN') val();
+          var $Kode_Buku = $('#InputKodeBuku').val();
+          var $Judul_Buku = $('InputJudulBuku').val();
+          var $Kategori_Buku = $('InputKategoriBuku').val();
+          var $Pengarang = $('InputPengarang').val();
+          var $Penerbit = $('InputPenerbit').val();
+          var $Tahun_Terbit = $('InputTahunTerbit').val();
+          var $Jumlah_Halaman = $('InputJumlahHalaman').val();
+          var $Jumlah_Eksemplar = $('InputJumlahEksemplar').val();
+          var $Nomor_ISBN = $('InputNomorISBN').val();
 
           $.ajax({
-            url:"<?php echo site_url("Buku/Tambah") ?>"
+            url: "<?php echo site_url("Perpustakaansmit/Tambah") ?>",
             type: "POST",
-            success:function(hasil){
-              alert(hasil);
+            data:{
+               Kode_Buku: $Kode_Buku,
+               Judul_Buku: $Judul_Buku,
+               Kategori_Buku: $Kategori_Buku,
+               Pengarang: $Pengarang,
+               Penerbit: $Penerbit,
+               Tahun_Terbit: $Tahun_Terbit,
+               Jumlah_Halaman: $Jumlah_Halaman,
+               Jumlah_Eksemplar: $Jumlah_Eksemplar,
+               Nomor_ISBN: $Nomor_ISBN
+            },
+            success: function(hasil) {
+              var $obj = $.parseJSON(hasil);
+              if($obj.sukses == false) {
+                $('.sukses').hide();
+                $('.error').show();
+                $('.error').html($obj.error);
+              } else {
+                $('.error').hide();
+                $('.sukses').show();
+                $('.sukses').html($obj.sukses);
+              }
             }
-
           });  
-          });
+        });
      </script>
 </body>
 
