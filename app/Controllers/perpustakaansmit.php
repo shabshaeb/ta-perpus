@@ -17,7 +17,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[4]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Minimum karakter 4'
+                   'min_length' => 'Minimum karakter untuk {field} 4 angka'
                ]
             ], 
             'Judul_Buku' => [
@@ -25,7 +25,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[4]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Minimum karakter 4 karakter'
+                   'min_length' => 'Minimum karakter untuk {field} 4 huruf'
                ]
             ],
             'Kategori_Buku' => [
@@ -33,7 +33,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[4]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Minimum karakter 4 karakter'
+                   'min_length' => 'Minimum karakter untuk {field} 4 huruf'
                ]
             ],
             'Pengarang' => [
@@ -41,7 +41,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[4]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Minimum karakter 4 karakter'
+                   'min_length' => 'Minimum karakter untuk {field} 4 huruf'
                ]
             ],
             'Penerbit' => [
@@ -49,7 +49,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[4]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Minimum karakter 4 karakter'
+                   'min_length' => 'Minimum karakter untuk {field} 4 huruf'
                ]
             ],
             'Tahun_Terbit' => [
@@ -57,7 +57,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[4]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Minimum karakter 4 karakter'
+                   'min_length' => 'Minimum karakter untuk {field} 4 angka'
                ]
             ],
             'Jumlah_Halaman' => [
@@ -65,7 +65,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[1]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Masukkan angka'
+                   'min_length' => 'Minimum karakter untuk {field} 1 angka'
                ]
             ],
             'Jumlah_Eksemplar' => [
@@ -73,7 +73,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[1]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Masukkan Angka'
+                   'min_length' => 'Minimum karakter untuk {field} 1 angka'
                ]
             ],
             'Nomor_ISBN' => [
@@ -81,7 +81,7 @@ class Perpustakaansmit extends BaseController
                'rules' => 'required|min_Length[1]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Masukkan angka'
+                   'min_length' => 'Minimum karakter untuk {field} 4 angka'
                ]
             ],
         ];
@@ -97,6 +97,20 @@ class Perpustakaansmit extends BaseController
            $Jumlah_Halaman = $this->request->getPost('Jumlah_Halaman');
            $Jumlah_Eksemplar = $this->request->getPost('Jumlah_Eksemplar');
            $Nomor_ISBN = $this->request->getPost('Nomor_ISBN');
+
+           $data = [
+               'Kode_Buku' => $Kode_Buku,
+               'Judul_Buku' => $Judul_Buku,
+               'Kategori_Buku' => $Kategori_Buku,
+               'Pengarang' => $Pengarang,
+               'Penerbit' => $Penerbit,
+               'Tahun_Terbit' => $Tahun_Terbit,
+               'Jumlah_Halaman' => $Jumlah_Halaman,
+               'Jumlah_Eksemplar' => $Jumlah_Eksemplar,
+               'Nomor_ISBN' => $Nomor_ISBN
+           ];
+
+           $this->model->save($data);
            
            $hasil['sukses'] = "Data Berhasil ditambah";
            $hasil['error'] = true;
