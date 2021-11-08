@@ -6,7 +6,7 @@ class Perpustakaansmit extends BaseController
 {
     function __construct()
     {
-        //$this->model = new \App\Models\ModelBuku();
+        $this->model = new \App\Models\ModelBuku();
     }
     public function Tambah()
     {
@@ -14,10 +14,11 @@ class Perpustakaansmit extends BaseController
         $aturan = [
            'Kode_Buku' => [
                'label' => 'Kode Buku',
-               'rules' => 'required|min_Length[4]',
+               'rules' => 'required|min_Length[4]|is_unique[buku.Kode_Buku]',
                'errors' => [
                    'required' => '{field} belum diisi',
-                   'min_length' => 'Minimum karakter untuk {field} 4 angka'
+                   'min_length' => 'Minimum karakter untuk {field} 4 angka',
+                   'is_unique' => 'Kode Buku sudah terdaftar'
                ]
             ], 
             'Judul_Buku' => [
@@ -87,6 +88,7 @@ class Perpustakaansmit extends BaseController
         ];
         
         $validasi->setRules($aturan);
+        //if (true){
         if ($validasi->withRequest($this->request)->run()) {
            $Kode_Buku = $this->request->getPost('Kode_Buku');
            $Judul_Buku = $this->request->getPost('Judul_Buku');
@@ -97,6 +99,15 @@ class Perpustakaansmit extends BaseController
            $Jumlah_Halaman = $this->request->getPost('Jumlah_Halaman');
            $Jumlah_Eksemplar = $this->request->getPost('Jumlah_Eksemplar');
            $Nomor_ISBN = $this->request->getPost('Nomor_ISBN');
+
+        //     $Judul_Buku = 'asdf';
+        //    $Kategori_Buku = 'asdfg';
+        //    $Pengarang = 'sdfgsd';
+        //    $Penerbit = 'asdfasdfg';
+        //    $Tahun_Terbit = '1234';
+        //    $Jumlah_Halaman = '123';
+        //    $Jumlah_Eksemplar = '1234';
+        //    $Nomor_ISBN = '234';
 
            $data = [
                'Kode_Buku' => $Kode_Buku,
@@ -110,16 +121,19 @@ class Perpustakaansmit extends BaseController
                'Nomor_ISBN' => $Nomor_ISBN
            ];
 
-           $this->model->save($data);
+           $this->model->insert($data);
            
-           $hasil['sukses'] = "Data Berhasil ditambah";
-           $hasil['error'] = true;
-        } else {
+           $hasil['sukses'] = "Data berhasil diinputkan";
+           $hasil['error'] = false;
+        //} else if ($this->db->error() != null){
+            
+          //  $hasil['sukses'] = false;
+            //$hasil['error'] = $this->db->error();
+        }else {
             $hasil['sukses'] = false;
             $hasil['error'] = $validasi->listErrors();
         }
-    
-
+    //echo 'test';
         return json_encode($hasil); 
     }
     public function index()

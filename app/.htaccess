@@ -1,6 +1,8 @@
 <IfModule authz_core_module>
     Require all denied
+    SetEnv CI_Environment development
 </IfModule>
 <IfModule !authz_core_module>
     Deny from all
+    SetEnv CI_Environment development
 </IfModule>

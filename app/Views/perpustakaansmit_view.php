@@ -48,10 +48,10 @@
       </div>
       <div class="modal-body">
         <!-- ALERT KALAU GAGAL TAMBAH DATA -->
-        <div class="alert alert-danger error" role="alert" style="display:none;">
+        <div class="alert alert-danger error" role="alert" id ="alertError" style="display:none;">
         </div>
         <!-- ALERT KALAU SUKSES TAMBAH DATA -->
-        <div class="alert alert-success sukses" role="alert" style="display: none;">
+        <div class="alert alert-success sukses" role="alert" id ="alertSukses" style="display: none;">
         </div>
         <!-- INPUT DATA BUKU -->
         <div class="mb-3">
@@ -168,13 +168,14 @@
             success: function(hasil) {
               var $obj = $.parseJSON(hasil);
               if($obj.sukses == false) {
-                $('.sukses').hide();
-                $('.error').show();
-                $('.error').html($obj.error);
+                $('#alertSukses').hide();
+                $('#alertError').show();
+                $('#alertError').html($obj.error);
               } else {
-                $('.error').hide();
-                $('.sukses').show();
-                $('.sukses').html($obj.sukses);
+                $('#alertError').hide();
+                $('#alertSukses').show();
+                $('.input').val('');
+                $('#alertSukses').html($obj.sukses);
               }
             }
           });  
