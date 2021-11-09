@@ -29,7 +29,7 @@
   <div class="input-group mb-3">
     <form action="" method="get">
   <input type="text" class="form-control" value="<?php echo $katakunci ?>" name="katakunci" placeholder="cari data buku" aria-label="Cari data buku" aria-describedby="button-addon2">
-  <button class="btn btn-outline-secondary" type="button" id="button-addon2">cari</button>
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">cari</button>
 </div>
 </form>
 <!-- MODAL -->
