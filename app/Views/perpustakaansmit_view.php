@@ -28,7 +28,7 @@
     <form action="" method="get">
   <div class="input-group mb-3">
     <form action="" method="get">
-  <input type="text" class="form-control" placeholder="cari data buku" aria-label="Cari data buku" aria-describedby="button-addon2">
+  <input type="text" class="form-control" value="<?php echo $katakunci ?>" name="katakunci" placeholder="cari data buku" aria-label="Cari data buku" aria-describedby="button-addon2">
   <button class="btn btn-outline-secondary" type="button" id="button-addon2">cari</button>
 </div>
 </form>
@@ -107,7 +107,6 @@
     <th>Pengarang</th>
     <th>Penerbit</th>
     <th>Tahun Terbit</th>
-    <th>Tahun Terbit</th>
     <th>Jumlah Halaman</th>
     <th>Jumlah Eksemplar</th>
     <th>Nomor ISBN</th>
@@ -115,24 +114,34 @@
   </tr>
   </thead>
   <tbody>
+    <?php
+    foreach($dataBuku as $k => $v){
+    ?>
     <tr>
-      <td>001001</td>
-      <td>IPA Kelas VII</td>
-      <td>Pendidikan</td>
-      <td>Asep Suryatna, Enjah Takari</td>
-      <td>Pusat Perbukuan Deartemen Pend. Nasional</td>
-      <td>2008</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>1234567891011</td>
+      <td><?php echo $v['Kode_Buku'] ?></td>
+      <td><?php echo $v['Judul_Buku'] ?></td>
+      <td><?php echo $v['Kategori_Buku'] ?></td>
+      <td><?php echo $v['Pengarang'] ?></td>
+      <td><?php echo $v['Penerbit'] ?></td>
+      <td><?php echo $v['Tahun_Terbit'] ?></td>
+      <td><?php echo $v['Jumlah_Halaman'] ?></td>
+      <td><?php echo $v['Jumlah_Eksemplar'] ?></td>
+      <td><?php echo $v['Nomor_ISBN'] ?></td>
       <td>
       <button type="button" class="btn btn-warning btn-sm">ubah</button>
       <button type="button" class="btn btn-danger btn-sm">hapus</button>
       </td>
     </tr>
+    <?php } ?>
   </tbody>
 </table>
+<?php
+$linkPagination = $pager->links();
+$linkPagination = str_replace('<li class="active">','<li class=page-item active">', $linkPagination);
+$linkPagination = str_replace('<li>','<li class="page-item">', $linkPagination);
+$linkPagination = str_replace("<a","<a class='page-link'", $linkPagination); 
+echo $linkPagination;
+?>
 </div>   
 </div>
     <!-- SCRIPT JAVASCRIPT -->
@@ -174,7 +183,7 @@
               } else {
                 $('#alertError').hide();
                 $('#alertSukses').show();
-                $('.input').val('');
+                //$('.input').val('');
                 $('#alertSukses').html($obj.sukses);
               }
             }
