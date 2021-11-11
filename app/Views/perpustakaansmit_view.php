@@ -34,7 +34,7 @@
 </form>
 <!-- MODAL -->
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button tsype="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Tambah Data Buku
 </button>
 
@@ -44,16 +44,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Identitas Buku Perpustakaan</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close tombol-tutup" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <!-- ALERT KALAU GAGAL TAMBAH DATA -->
         <div class="alert alert-danger error" role="alert" id ="alertError" style="display:none;">
         </div>
         <!-- ALERT KALAU SUKSES TAMBAH DATA -->
-        <div class="alert alert-success sukses" role="alert" id ="alertSukses" style="display: none;">
+        <div class="alert alert-success sukses" role="alert" id ="alertSukses" style="display:none;">
         </div>
         <!-- INPUT DATA BUKU -->
+        <input type="hidden" id="InputKodeBuku">
         <div class="mb-3">
   <label for="InputKodeBuku" class="form-label">Kode Buku</label>
   <input type="number" class="form-control" id="InputKodeBuku" placeholder="">
@@ -92,7 +93,7 @@
 </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-secondary tombol-tutup" data-bs-dismiss="modal">Batal</button>
         <button type="button" class="btn btn-primary" id="tomboltambahdata"> Tambah</button>
       </div>
     </div>
@@ -128,7 +129,7 @@
       <td><?php echo $v['Jumlah_Eksemplar'] ?></td>
       <td><?php echo $v['Nomor_ISBN'] ?></td>
       <td>
-      <button type="button" class="btn btn-warning btn-sm">ubah</button>
+      <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick="edit(<?php echo $v['Kode_Buku'] ?>)">ubah</button>
       <button type="button" class="btn btn-danger btn-sm">hapus</button>
       </td>
     </tr>
@@ -149,6 +150,35 @@ echo $linkPagination;
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
      <script>
+       function edit($Kode_Buku) {
+         $.ajax({
+          url: "<?php echo site_url("Perpustakaansmit/edit")?>/" + $Kode_Buku,
+          type= "get",
+          success: function(hasil) {
+            alert(hasil);
+            }
+          } 
+         });
+
+       }
+       function bersihkan(){
+         $('#InputKodeBuku').val('');
+         $('#InputJudulBuku').val('');
+         $('#InputKategoriBuku').val('');
+         $('#InputPengarang').val('');
+         $('#InputPenerbit').val('');
+         $('#InputTahunTerbit').val('');
+         $('#InputJumlahHalaman').val('');
+         $('#InputJumlahEksemplar').val('');
+         $('#InputNomorISBN').val('');
+       }
+       $('.tombol-tutup').on('click',function() {
+         if($('.sukses').is(":visible")) {
+            window.location.href = "<?php echo current_url() . "?" . $_SERVER['QUERY_STRING']?>";
+         }
+         $('#alertSukses').show();
+         bersihkan();
+       });
        $('#tomboltambahdata').on('click', function() {
           var $Kode_Buku = $('#InputKodeBuku').val();
           var $Judul_Buku = $('#InputJudulBuku').val();
@@ -183,11 +213,11 @@ echo $linkPagination;
               } else {
                 $('#alertError').hide();
                 $('#alertSukses').show();
-                //$('.input').val('');
                 $('#alertSukses').html($obj.sukses);
               }
             }
-          });  
+          });
+           bersihkan();
         });
      </script>
 </body>

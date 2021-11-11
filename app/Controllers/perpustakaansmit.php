@@ -8,6 +8,12 @@ class Perpustakaansmit extends BaseController
     {
         $this->model = new \App\Models\ModelBuku();
     }
+
+    public function edit ($Kode_Buku)
+    {
+        return json_encode($this->model->find($Kode_Buku));
+    }
+
     public function Tambah()
     {
         $validasi = \Config\Services::validation();
@@ -16,7 +22,7 @@ class Perpustakaansmit extends BaseController
                'label' => 'Kode Buku',
                'rules' => 'required|min_length[4]|is_unique[buku.Kode_Buku]',
                'errors' => [
-                   'required' => '{field} belum diisi',
+                   'required' => '{fi eld} belum diisi',
                    'min_length' => 'Minimum karakter untuk {field} 4 angka',
                    'is_unique' => 'Kode Buku sudah terdaftar'
                ]
