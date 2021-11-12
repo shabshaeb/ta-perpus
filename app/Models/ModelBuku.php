@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class ModelBuku extends Model
 {
     protected $table = "buku";
-    protected $primaryKey = "Kode_Buku";
+    //protected $primaryKey = "Kode_Buku";
     protected $allowedFields = ['Kode_Buku','Judul_Buku','Kategori_Buku','Pengarang','Penerbit','Tahun_Terbit','Jumlah_Halaman','Jumlah_Eksemplar','Nomor_ISBN'];
 
     function cari($katakunci)

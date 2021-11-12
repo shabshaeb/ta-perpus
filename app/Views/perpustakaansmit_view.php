@@ -44,7 +44,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Identitas Buku Perpustakaan</h5>
-        <button type="button" class="btn-close tombol-tutup" data-bs-dismiss="modal" aria-label="Close"></button>
+        <button type="button" class="btn-close tutup" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <!-- ALERT KALAU GAGAL TAMBAH DATA -->
@@ -93,7 +93,7 @@
 </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary tombol-tutup" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-secondary tutup" data-bs-dismiss="modal">Batal</button>
         <button type="button" class="btn btn-primary" id="tomboltambahdata"> Tambah</button>
       </div>
     </div>
@@ -138,7 +138,7 @@
 </table>
 <?php
 $linkPagination = $pager->links();
-$linkPagination = str_replace('<li class="active">','<li class=page-item active">', $linkPagination);
+$linkPagination = str_replace('<li class="active">','<li class="page-item active">', $linkPagination);
 $linkPagination = str_replace('<li>','<li class="page-item">', $linkPagination);
 $linkPagination = str_replace("<a","<a class='page-link'", $linkPagination); 
 echo $linkPagination;
@@ -161,7 +161,7 @@ echo $linkPagination;
          });
 
        }
-       function bersihkan(){
+       function bersihkan() {
          $('#InputKodeBuku').val('');
          $('#InputJudulBuku').val('');
          $('#InputKategoriBuku').val('');
@@ -172,13 +172,14 @@ echo $linkPagination;
          $('#InputJumlahEksemplar').val('');
          $('#InputNomorISBN').val('');
        }
-       $('.tombol-tutup').on('click',function() {
+       $('.tutup').on('click', function() {
          if($('.sukses').is(":visible")) {
             window.location.href = "<?php echo current_url() . "?" . $_SERVER['QUERY_STRING']?>";
          }
-         $('#alertSukses').show();
+         $('.alert').hide();
          bersihkan();
        });
+
        $('#tomboltambahdata').on('click', function() {
           var $Kode_Buku = $('#InputKodeBuku').val();
           var $Judul_Buku = $('#InputJudulBuku').val();

@@ -11,7 +11,7 @@ class Perpustakaansmit extends BaseController
 
     public function edit ($Kode_Buku)
     {
-        return json_encode($this->model->find($Kode_Buku));
+        return json_encode($this->model->find('Buku.Kode_Buku'));
     }
 
     public function Tambah()
@@ -22,7 +22,7 @@ class Perpustakaansmit extends BaseController
                'label' => 'Kode Buku',
                'rules' => 'required|min_length[4]|is_unique[buku.Kode_Buku]',
                'errors' => [
-                   'required' => '{fi eld} belum diisi',
+                   'required' => '{field} belum diisi',
                    'min_length' => 'Minimum karakter untuk {field} 4 angka',
                    'is_unique' => 'Kode Buku sudah terdaftar'
                ]
@@ -94,7 +94,6 @@ class Perpustakaansmit extends BaseController
         ];
         
         $validasi->setRules($aturan);
-
         if ($validasi->withRequest($this->request)->run()) {
            $Kode_Buku = $this->request->getPost('Kode_Buku');
            $Judul_Buku = $this->request->getPost('Judul_Buku');
@@ -123,7 +122,7 @@ class Perpustakaansmit extends BaseController
            $hasil['sukses'] = "Data berhasil diinputkan";
            $hasil['error'] = false;
 
-        }else {
+        } else {
             $hasil['sukses'] = false;
             $hasil['error'] = $validasi->listErrors();
         }
@@ -136,7 +135,7 @@ class Perpustakaansmit extends BaseController
         $katakunci = $this->request->getGet('katakunci');
         if($katakunci){
             $pencarian = $this->model->cari($katakunci);           
-        }else{
+        } else {
             $pencarian = $this->model;
         }
         $data['katakunci'] = $katakunci;
